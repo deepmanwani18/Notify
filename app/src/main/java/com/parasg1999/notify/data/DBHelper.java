@@ -5,7 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.parasg1999.notify.data.NoteContract.NoteEntry;
 
+/* Class to manage database creation and management */
 public class DBHelper extends SQLiteOpenHelper {
+
+    private static final String LOG_TAG = DBHelper.class.getSimpleName();
 
     /** Name of database file */
     private static final String DATABASE_NAME = "notes.db";
@@ -30,11 +33,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 + NoteEntry.NOTE_CREATED + " DATETIME"
                 + NoteEntry.NOTE_UPDATED + " DATETIME"
                 + NoteEntry.NOTE_COLOR + " INTEGER NOT NULL DEFAULT 0);" ;
+
+        db.execSQL(SQL_CREATE_NOTES_TABLE);
     }
 
     /** Called when database needs to be updated*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        /*Current version is 1.
+        * TODO: Update when Tags need to be added*/
     }
 }
