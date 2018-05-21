@@ -27,11 +27,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // TODO: Use Html.fromHtml method for bold and italics
-         final TextView textView = (TextView) findViewById(R.id.aaaa);
-         textView.setText(Html.fromHtml("<b> Bold </b> <br> <i> Italics </i> <br> <u> underline </u> "));
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

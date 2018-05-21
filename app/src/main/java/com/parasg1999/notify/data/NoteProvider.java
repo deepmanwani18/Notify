@@ -102,7 +102,15 @@ public class NoteProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        int match = sUriMatcher.match(uri);
+        switch (match) {
+            case NOTES:
+                return NoteContract.NoteEntry.CONTENT_LIST_TYPE;
+            case NOTE_ID:
+                return NoteContract.NoteEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalArgumentException("Unknown Uri " + uri + " with match " + match);
+        }
     }
 
     @Nullable
@@ -142,8 +150,26 @@ public class NoteProvider extends ContentProvider {
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        int rowsDeleted;
 
-        return 0;
+        int match = sUriMatcher.match(uri);
+        switch (match) {
+            case NOTE_ID:
+                //Delete a single Note
+                selection = NoteContract.NoteEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                rowsDeleted = database.delete(NoteContract.NoteEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Deletion not possible for " + uri);
+        }
+
+        /*If 1 or more rows were deleted, then notify all listeners that the data at the given URI has changed */
+        if(rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsDeleted;
     }
 
     @Override

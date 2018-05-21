@@ -27,11 +27,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_NOTES_TABLE = "CREATE TABLE " + NoteEntry.TABLE_NAME + " ("
-                + NoteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT"
-                + NoteEntry.NOTE_TITLE + " TEXT"
-                + NoteEntry.NOTE_CONTENT + " TEXT"
-                + NoteEntry.NOTE_CREATED + " DATETIME"
-                + NoteEntry.NOTE_UPDATED + " DATETIME"
+                + NoteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + NoteEntry.NOTE_TITLE + " TEXT, "
+                + NoteEntry.NOTE_CONTENT + " TEXT, "
+                + NoteEntry.NOTE_CREATED + " DATETIME, "
+                + NoteEntry.NOTE_UPDATED + " DATETIME, "
                 + NoteEntry.NOTE_COLOR + " INTEGER NOT NULL DEFAULT 0);" ;
 
         db.execSQL(SQL_CREATE_NOTES_TABLE);
