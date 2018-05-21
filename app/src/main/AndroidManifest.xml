@@ -24,6 +24,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
         </activity>
+        <provider
+            android:authorities="com.parasg1999.notify"
+            android:name=".data.NoteProvider"
+            android:exported="false" />
     </application>
 
 </manifest>
