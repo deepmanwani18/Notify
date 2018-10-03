@@ -1,5 +1,7 @@
 package com.parasg1999.notify.data;
 
+/** Imports for various libraries*/
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
